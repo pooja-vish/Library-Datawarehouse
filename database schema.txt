@@ -1,0 +1,78 @@
+create database library_dw;
+use library_dw;
+create table dw_dates(
+dateId int PRIMARY KEY AUTO_INCREMENT,
+dwYear int,
+dwMonth int,
+dwDay int);
+create table branch(
+branchId int primary key,
+bName varchar(250),
+bAddress varchar(200),
+bManager varchar(150)
+);
+create table books(
+bid int primary key,
+bName varchar(200),
+noOfCopies int,
+bAuthorName varchar(150)
+);
+create table members (
+mid int primary key,
+mName varchar(200),
+mPhone varchar(20));
+create table fact(
+bid int,
+mid int,
+transType varchar(30),
+dateId int,
+branchId int,
+FOREIGN KEY (bid) references books(bid),
+FOREIGN KEY (mid) references members(mid),
+FOREIGN KEY (dateId) references dw_dates(dateId),
+FOREIGN KEY (branchId) references branch(branchId)
+);
+create database toronto;
+use toronto;
+create table books(
+bid int primary key,
+bName varchar(200),
+bAuthor varchar(150),
+publishYear int,
+noOfCopies int);
+create table members(
+mid int primary key,
+mName varchar(200),
+mPhoneNo varchar(20),
+mAddress varchar(250)
+);
+create table borrowers(
+mid int,
+bid int,
+bDate date,
+transType varchar (30),
+FOREIGN KEY (mid) references members(mid),
+FOREIGN KEY (bid) references books(bid)
+);
+create database windsor;
+use windsor;
+create table books(
+bid int primary key,
+bName varchar(200),
+bAuthor varchar(150),
+publishYear int,
+noOfCopies int);
+create table members(
+mid int primary key,
+mName varchar(200),
+mEmail varchar(150),
+mPhoneNo varchar(20)
+);
+create table borrowers(
+mid int,
+bid int,
+bDate date,
+transType varchar (30),
+FOREIGN KEY (mid) references members(mid),
+FOREIGN KEY (bid) references books(bid)
+);
